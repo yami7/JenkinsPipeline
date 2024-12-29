@@ -6,8 +6,8 @@ pipeline {
     stages {
         stage('build') {
             steps {
-               
-                echo 'building' //if  linux..sh,in windows…bat
+                // Ensure Terraform is installed and check the version
+                echo 'building' //if terraform is chosen as linux..sh,in windows…bat
             }
         }
         stage('Test') {
