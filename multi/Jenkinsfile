@@ -33,13 +33,14 @@ pipeline {
             steps {
                 // Initialize Terraform
                 echo 'deploying'
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'CREDEXAMPLE', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
-                {
-                    sh """
-                   echo 'uname=$USERNAME pwd=$PASSWORD'
-                    """
-                    }
+                //withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'CREDEXAMPLE', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
+                //{
+                //    sh """
+                //   echo 'uname=$USERNAME pwd=$PASSWORD'
+                //    """
+                //    }
                 echo "deploying with ${SERVER_CREDENTIALS}"
+                echo "deploying with ${SERVER_CREDENTIALS_USR}:${SERVER_CREDENTIALS_PSW}"
 
                 
 
