@@ -2,10 +2,9 @@
 pipeline {    
     agent any
     environment{//environment variables-defining in environment block
-        NEW_VERSION='Jenkinsversion'
-        SERVER_CREDENTIALS=credentials('Cred-example')
-        USER='defaultpwd'
-        PWD='defaultpwd'
+        NEW_VERSION='Jenkinsversion'//public value
+        SERVER_CREDENTIALS=credentials('Cred-example')//secret value
+       
 
     } 
     tools {
@@ -38,7 +37,7 @@ pipeline {
                 withCredentials([ //Object syntax in groovy,instead of defining credential in the block,can be used like this
                         usernamePassword(credentialsId: 'Cred-example', usernameVariable: USER, passwordVariable: PWD)
                 ]){
-                    sh "some script ${USER} ${PWD}"
+                    sh "some script ${env.USER} ${env.PWD}"
                 }
 
             }
