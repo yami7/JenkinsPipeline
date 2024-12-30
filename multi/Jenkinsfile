@@ -36,7 +36,7 @@ pipeline {
                 echo 'deploying'
                 echo 'deploying with ${SERVER_CREDENTIALS}'
                 withCredentials([ //instead of defining credential in the block,can be used like this
-                        usernamePassword(credentials: 'Cred-example',usernameVariable: USER,passwordVariable: password:PWD)
+                        usernamePassword(credentials: 'Cred-example',usernameVariable: USER,passwordVariable: PWD)
                 ]){
                     sh "some script ${USER} ${PWD}"
                 }
