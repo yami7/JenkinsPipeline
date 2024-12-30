@@ -33,19 +33,15 @@ pipeline {
             steps {
                 // Initialize Terraform
                 echo 'deploying'
-                //withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'CREDEXAMPLE', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
-                //{
-                    //sh """
-                   // echo uname=$USERNAME pwd=$PASSWORD
-                    //"""
-                    //}
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'CREDEXAMPLE', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
+                {
+                    sh """
+                   echo uname=$USERNAME pwd=$PASSWORD
+                    """
+                    }
                 echo "deploying with ${SERVER_CREDENTIALS}"
 
-                //withCredentials([ //Object syntax in groovy,instead of defining credential in the block,can be used like this
-                        //usernamePassword(credentialsId: 'CREDEXAMPLE', usernameVariable: USER, passwordVariable: PWD)
-                //]){
-                    //sh "some script ${env.USER} ${env.PWD}"
-                //}
+                
 
             }
         }
