@@ -4,6 +4,9 @@ pipeline {
     environment{//environment variables-defining in environment block
         NEW_VERSION='Jenkinsversion'
         SERVER_CREDENTIALS=credentials('Cred-example')
+        USER='defaultpwd'
+        PWD='defaultpwd'
+
     } 
     tools {
         terraform 'Terraform_1.10.3' // Ensure this matches the tool name configured in Jenkins
@@ -33,7 +36,7 @@ pipeline {
                 echo 'deploying'
                 echo 'deploying with ${SERVER_CREDENTIALS}'
                 withCredentials([ //instead of defining credential in the block,can be used like this
-                        usernamePassword(credentials: 'Cred-example',usernameVariable: USER,passwordVariable: password)
+                        usernamePassword(credentials: 'Cred-example',usernameVariable: USER,passwordVariable: password:PWD)
                 ]){
                     sh "some script ${USER} ${PWD}"
                 }
