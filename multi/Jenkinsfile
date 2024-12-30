@@ -1,6 +1,9 @@
 //CODE_CHANGES=getGitChanges()
 pipeline {    
-    agent any 
+    agent any
+    environment{
+        NEW_VERSION='Jenkinsversion'
+    } 
     tools {
         terraform 'Terraform_1.10.3' // Ensure this matches the tool name configured in Jenkins
     }
