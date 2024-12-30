@@ -39,8 +39,8 @@ pipeline {
                 //   echo 'uname=$USERNAME pwd=$PASSWORD'
                 //    """
                 //    }
-                echo "deploying with ${SERVER_CREDENTIALS}"
-                echo "deploying with ${SERVER_CREDENTIALS_USR}:${SERVER_CREDENTIALS_PSW}"
+                sh('echo deploying with ${SERVER_CREDENTIALS}')
+                sh('echo deploying with ${SERVER_CREDENTIALS_USR}:${SERVER_CREDENTIALS_PSW}')
 
                 
 
