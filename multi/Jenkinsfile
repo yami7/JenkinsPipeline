@@ -36,7 +36,7 @@ pipeline {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'CREDEXAMPLE', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
                 {
                     sh """
-                   echo uname=$USERNAME pwd=$PASSWORD
+                   echo 'uname=$USERNAME pwd=$PASSWORD'
                     """
                     }
                 echo "deploying with ${SERVER_CREDENTIALS}"
