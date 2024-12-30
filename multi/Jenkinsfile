@@ -39,7 +39,8 @@ pipeline {
                    // echo uname=$USERNAME pwd=$PASSWORD
                     //"""
                     //}
-                sh 'echo deploying with ${SERVER_CREDENTIALS}'
+                echo "deploying with ${SERVER_CREDENTIALS}"
+
                 //withCredentials([ //Object syntax in groovy,instead of defining credential in the block,can be used like this
                         //usernamePassword(credentialsId: 'CREDEXAMPLE', usernameVariable: USER, passwordVariable: PWD)
                 //]){
