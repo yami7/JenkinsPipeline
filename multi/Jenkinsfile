@@ -35,8 +35,8 @@ pipeline {
                 // Initialize Terraform
                 echo 'deploying'
                 echo 'deploying with ${SERVER_CREDENTIALS}'
-                withCredentials([ //instead of defining credential in the block,can be used like this
-                        usernamePassword(credentials: 'Cred-example',usernameVariable: USER,passwordVariable: PWD)
+                withCredentials([ //Object syntax in groovy,instead of defining credential in the block,can be used like this
+                        usernamePassword(credentialsId: 'Cred-example', usernameVariable: USER, passwordVariable: PWD)
                 ]){
                     sh "some script ${USER} ${PWD}"
                 }
