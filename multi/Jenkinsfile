@@ -21,7 +21,7 @@ pipeline {
                 // Ensure Terraform is installed and check the version
                 echo 'building' //if terraform is chosen as linux..sh,in windows…bat
                 echo "building the version ${NEW_VERSION}"
-                sh "mvn install"
+                //sh "mvn install"
             }
         }
         stage('Test') {
