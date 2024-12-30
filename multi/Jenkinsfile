@@ -1,23 +1,33 @@
 //CODE_CHANGES=getGitChanges()
 pipeline {    
     agent any
-    environment{
-        NEW_VERSION='Jenkinsversion'
-    } 
-    tools {
-        terraform 'Terraform_1.10.3' // Ensure this matches the tool name configured in Jenkins
+    environment{//environment variables-defining in environment block
+        NEW_VERSION='Jenkinsversion'//public value
+        SERVER_CREDENTIALS=credentials('CREDEXAMPLE')//secret value
     }
+    parameters{//external configuration that needs to be changed during build
+        //string(name:'VERSION',defaultValue:'',description:'version to deploy on prod')
+        choice(name:'VERSION',choices:['1.1.0','1.2.0','1.3.0'],description:'')
+        booleanParam(name:'executeTests',defaultValue:true,description:'')
+    } 
+    // tools { //access to build tools for the projects
+    //3 tools jenkinsfile supports is gradle,maven,jdk
+    //    terraform 'Terraform_1.10.3' // Ensure this matches the tool name configured in Jenkins
+    //    maven 'Maven'
+    //}
     stages {
         stage('build') {
             steps {
                 // Ensure Terraform is installed and check the version
                 echo 'building' //if terraform is chosen as linux..sh,in windows…bat
+                echo "building the version ${NEW_VERSION}"
+                //sh "mvn install"
             }
         }
         stage('Test') {
             when{
                 expression{
-                    BRANCH_NAME == 'jenkin1'// && CODE_CHANGES==True //when condition met,then only steps block executed
+                    BRANCH_NAME == 'jenkin1' && params.executeTests==true// && CODE_CHANGES==True //when condition met,then only steps block executed
                 }
             }
             steps {
@@ -29,6 +39,17 @@ pipeline {
             steps {
                 // Initialize Terraform
                 echo 'deploying'
+                //withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'CREDEXAMPLE', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
+                //{
+                //    sh """
+                //   echo 'uname=$USERNAME pwd=$PASSWORD'
+                //    """
+                //    }
+                echo "deploying with ${SERVER_CREDENTIALS}"
+                echo "deploying with ${SERVER_CREDENTIALS_USR}:${SERVER_CREDENTIALS_PSW}"//append _USR and _PSW,we have other syntax called wrapper syntax.
+                echo "deploying version ${params.VERSION}"
+                
+
             }
         }
         
