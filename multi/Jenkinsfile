@@ -1,8 +1,9 @@
 //CODE_CHANGES=getGitChanges()
 pipeline {    
     agent any
-    environment{
+    environment{//environment variables-defining in environment block
         NEW_VERSION='Jenkinsversion'
+        SERVER_CREDENTIALS=credentials('Cred-example')
     } 
     tools {
         terraform 'Terraform_1.10.3' // Ensure this matches the tool name configured in Jenkins
@@ -12,6 +13,7 @@ pipeline {
             steps {
                 // Ensure Terraform is installed and check the version
                 echo 'building' //if terraform is chosen as linux..sh,in windows…bat
+                echo "building the version ${NEW_VERSION}"
             }
         }
         stage('Test') {
@@ -29,6 +31,13 @@ pipeline {
             steps {
                 // Initialize Terraform
                 echo 'deploying'
+                echo 'deploying with ${SERVER_CREDENTIALS}'
+                withCredentials([ //instead of defining credential in the block,can be used like this
+                        usernamePassword(credentials: 'Cred-example',usernameVariable: USER,passwordVariable: password)
+                ]){
+                    sh "some script ${USER} ${PWD}"
+                }
+
             }
         }
         
