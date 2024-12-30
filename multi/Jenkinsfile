@@ -10,18 +10,18 @@ pipeline {
         choice(name:'VERSION',choices:['1.1.0','1.2.0','1.3.0'],description:'')
         booleanParam(name:'executeTests',defaultValue:true,description:'')
     } 
-    tools { //access to build tools for the projects
+    // tools { //access to build tools for the projects
     //3 tools jenkinsfile supports is gradle,maven,jdk
-        terraform 'Terraform_1.10.3' // Ensure this matches the tool name configured in Jenkins
-        maven 'Maven'
-    }
+    //    terraform 'Terraform_1.10.3' // Ensure this matches the tool name configured in Jenkins
+    //    maven 'Maven'
+    //}
     stages {
         stage('build') {
             steps {
                 // Ensure Terraform is installed and check the version
                 echo 'building' //if terraform is chosen as linux..sh,in windows…bat
                 echo "building the version ${NEW_VERSION}"
-                sh "mvn install"
+                //sh "mvn install"
             }
         }
         stage('Test') {
